@@ -67,11 +67,18 @@ decorators = [get_execution_times_and_call_count, get_function_info, GetExecutio
 
 
 def rank_decorators(test_function, *args, **kwargs):
+    """
+
+    :param test_function: Function to use as benchmark
+    :param args: function argument
+    :param kwargs: function keyword
+    :return: rank_table dataframe
+    """
     block_print()  # Disable Printing From Nested Functions
     rank_table = {}
     for index, decorator in enumerate(decorators):
         decorator_name = decorator.__name__
-        peak_print(f" {index + 1}/{len(decorators)} Testing {decorator_name}")
+        peak_print(f" {index + 1}/{len(decorators)} Testing {decorator_name}") # Show Progress
         decorated_test_function = decorator(test_function)
         execution_time = get_execution_time(args, kwargs, decorated_test_function)
         rank_table[decorator_name] = execution_time
@@ -80,8 +87,8 @@ def rank_decorators(test_function, *args, **kwargs):
             'RANK': [x + 1 for x in range(len(rank_table))],
             'TIME ELAPSED': [x[1] for x in rank_table]}
     rank_dataframe = pd.DataFrame.from_dict(data)
-    enable_print()
-    print(rank_dataframe)
+    enable_print() # Re enable print
+    print(rank_dataframe) #Show Rank table
     return rank_dataframe
 
 

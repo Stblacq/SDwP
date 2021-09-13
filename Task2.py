@@ -5,7 +5,17 @@ from utils import register
 
 
 def get_function_info(function):
+    """
+
+    :param function:
+    :return:
+    """
     def wrapper(*args, **kwargs):
+        """
+        :param args:
+        :param kwargs:
+        :return:
+        """
         function_name = function.__name__
         count_function_call(function_name)
         execution_time, function_call = get_execution_time(args, kwargs)
