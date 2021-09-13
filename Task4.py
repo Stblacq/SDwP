@@ -6,7 +6,16 @@ from utils import register, log
 
 
 def get_execution_times_and_call_count_with_log(function):
+    """
+    :param function:
+    :return:
+    """
     def wrapper(*args, **kwargs):
+        """
+        :param args:
+        :param kwargs:
+        :return:
+        """
         function_name = function.__name__
         count_function_call(function_name)
         execution_time, function_call = get_execution_time(args, kwargs)
